@@ -1,4 +1,4 @@
-defmodule AlixirSms do
+defmodule Alixir.Sms do
   @moduledoc """
   Documentation for AlixirSms.
   """
@@ -8,7 +8,7 @@ defmodule AlixirSms do
 
   ## Examples
 
-      iex> AlixirSms.hello
+      iex> Alixir.Sms.hello
       :world
 
   """
