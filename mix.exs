@@ -25,6 +25,7 @@ defmodule AlixirSms.MixProject do
   defp deps do
     [
       {:alixir_core, github: "GreenNerd-Labs/alixir_core", branch: "develop"},
+      {:poison, "~> 3.1"},
     ]
   end
 end
