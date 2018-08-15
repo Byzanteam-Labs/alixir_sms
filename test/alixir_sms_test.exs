@@ -1,8 +1,4 @@
-defmodule AlixirSmsTest do
+defmodule Alixir.SmsTest do
   use ExUnit.Case
-  doctest AlixirSms
-
-  test "greets the world" do
-    assert AlixirSms.hello() == :world
-  end
+  doctest Alixir.SMS
 end

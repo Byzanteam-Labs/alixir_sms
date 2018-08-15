@@ -1,28 +1,49 @@
 defmodule AlixirSms.MixProject do
   use Mix.Project
 
+  @project_host "https://github.com/GreenNerd-Labs/alixir_sms"
+  @version "0.1.0"
+
   def project do
     [
       app: :alixir_sms,
-      version: "0.1.0",
+      version: @version,
+      source_url: @project_host,
+      homepage_url: @project_host,
       elixir: "~> 1.6",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      description: description(),
+      deps: deps(),
+      package: package(),
     ]
   end
 
-  # Run "mix help compile.app" to learn about applications.
   def application do
     [
       extra_applications: [:logger]
     ]
   end
 
-  # Run "mix help deps" to learn about dependencies.
+  defp description do
+    "Aliyun SMS adapter."
+  end
+
   defp deps do
     [
-      # {:dep_from_hexpm, "~> 0.3.0"},
-      # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"},
+      {:alixir_core, "~> 0.1.0"},
+      {:poison, "~> 3.1"},
+
+      {:ex_doc, "~> 0.18.0", only: :dev},
+    ]
+  end
+
+  defp package do
+    [
+      name: :alixir_sms,
+      files: ["lib", "mix.exs", "README.md"],
+      maintainers: ["fahchen"],
+      licenses: ["MIT"],
+      links: %{"GitHub" => @project_host}
     ]
   end
 end
