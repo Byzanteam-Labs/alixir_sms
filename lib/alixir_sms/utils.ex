@@ -23,7 +23,7 @@ defmodule Alixir.SMS.Utils do
                   |> fn method ->
                     method <> @joiner <> url_encode("/", :pop) <> @joiner <> url_encode(query_str, :pop)
                   end.()
-    sign(Env.access_secret <> @joiner, str_to_sign)
+    sign(str_to_sign, Env.access_secret <> @joiner)
   end
 
   def build_system_params do
