@@ -32,6 +32,8 @@ defmodule AlixirSms.MixProject do
     [
       {:alixir_core, "~> 0.1.0"},
       {:poison, "~> 3.1"},
+
+      {:ex_doc, "~> 0.18.0", only: :dev},
     ]
   end
 
