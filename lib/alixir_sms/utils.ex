@@ -29,7 +29,7 @@ defmodule Alixir.SMS.Utils do
   def build_system_params do
     %{
       "SignatureMethod":  "HMAC-SHA1",
-      "SignatureNonce":   to_string(:rand.uniform(999_999_999_999)),
+      "SignatureNonce":   uuid(),
       "AccessKeyId":      Env.access_key_id(),
       "SignatureVersion": "1.0",
       "Timestamp":        iso_8601_extended_gmt_now(),
