@@ -57,8 +57,7 @@ defmodule Alixir.SMS.Utils do
 
   def canonicalize_parameters(%{} = parameters) do
     parameters
-    |> Map.to_list()
-    |> Enum.sort()
+    |> Enum.sort(fn {key1, _}, {key2, _} -> to_string(key1) < to_string(key2) end)
     |> Stream.reject(fn {_key, val} -> val == "" or val == nil end)
     |> Stream.map(fn {key, val} ->
       "#{key |> to_string() |> url_encode(:pop)}=#{val |> to_string() |> url_encode(:pop)}"
