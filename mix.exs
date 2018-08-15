@@ -39,7 +39,7 @@ defmodule AlixirSms.MixProject do
 
   defp package do
     [
-      name: :alixir_core,
+      name: :alixir_sms,
       files: ["lib", "mix.exs", "README.md"],
       maintainers: ["fahchen"],
       licenses: ["MIT"],
