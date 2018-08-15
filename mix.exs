@@ -30,7 +30,7 @@ defmodule AlixirSms.MixProject do
 
   defp deps do
     [
-      {:alixir_core, "~> 0.1.0"},
+      {:alixir_core, "~> 0.1"},
       {:poison, "~> 3.1"},
 
       {:ex_doc, "~> 0.18.0", only: :dev},
