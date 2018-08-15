@@ -63,7 +63,6 @@ defmodule Alixir.SMS.Utils do
     |> Stream.map(fn {key, val} ->
       "#{key |> to_string() |> url_encode(:pop)}=#{val |> to_string() |> url_encode(:pop)}"
     end)
-    |> Enum.to_list()
     |> Enum.join(@joiner)
   end
 end
