@@ -6,7 +6,7 @@ defmodule Alixir.SMS.Utils do
   @endpoint "http://dysmsapi.aliyuncs.com"
 
   def make_request_url(signature, query_str) do
-    "#{@endpoint}?Signature=#{url_encode(signature, :pop)}#{@joiner}#{query_str}"
+    "#{@endpoint}/?Signature=#{url_encode(signature, :pop)}#{@joiner}#{query_str}"
   end
 
   def make_query_string(operation) do
