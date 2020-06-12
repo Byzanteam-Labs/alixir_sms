@@ -2,7 +2,7 @@ defmodule AlixirSms.MixProject do
   use Mix.Project
 
   @project_host "https://github.com/GreenNerd-Labs/alixir_sms"
-  @version "0.1.4"
+  @version "0.1.5"
 
   def project do
     [
