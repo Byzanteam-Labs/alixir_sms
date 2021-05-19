@@ -17,42 +17,45 @@ defmodule Alixir.SMS.Utils do
   end
 
   def make_signature(http_method, query_str) do
-    str_to_sign = http_method
-                  |> to_string()
-                  |> String.upcase()
-                  |> fn method ->
-                    method <> @joiner <> url_encode("/", :pop) <> @joiner <> url_encode(query_str, :pop)
-                  end.()
-    sign(str_to_sign, Env.access_secret <> @joiner)
+    str_to_sign =
+      http_method
+      |> to_string()
+      |> String.upcase()
+      |> (fn method ->
+            method <> @joiner <> url_encode("/", :pop) <> @joiner <> url_encode(query_str, :pop)
+          end).()
+
+    sign(str_to_sign, Env.access_secret() <> @joiner)
   end
 
   def build_system_params do
     %{
-      "SignatureMethod":  "HMAC-SHA1",
-      "SignatureNonce":   uuid(),
-      "AccessKeyId":      Env.access_key_id(),
-      "SignatureVersion": "1.0",
-      "Timestamp":        iso_8601_extended_gmt_now(),
-      "Format":           Env.format(),
+      SignatureMethod: "HMAC-SHA1",
+      SignatureNonce: uuid(),
+      AccessKeyId: Env.access_key_id(),
+      SignatureVersion: "1.0",
+      Timestamp: iso_8601_extended_gmt_now(),
+      Format: Env.format()
     }
   end
 
   def build_send_sms_params(operation) do
     %{
-      "Action":        "SendSms",
-      "Version":       "2017-05-25",
-      "RegionId":      Env.region_id(),
-      "PhoneNumbers":  convert_phone_numbers(operation.phone_numbers),
-      "SignName":      operation.sign_name,
-      "TemplateCode":  operation.template_code,
-      "TemplateParam": Poison.encode!(operation.template_param),
-      "OutId":         operation.out_id,
+      Action: "SendSms",
+      Version: "2017-05-25",
+      RegionId: Env.region_id(),
+      PhoneNumbers: convert_phone_numbers(operation.phone_numbers),
+      SignName: operation.sign_name,
+      TemplateCode: operation.template_code,
+      TemplateParam: Poison.encode!(operation.template_param),
+      OutId: operation.out_id
     }
   end
 
   defp convert_phone_numbers(phone_numbers) when is_list(phone_numbers) do
     Enum.join(phone_numbers, ",")
   end
+
   defp convert_phone_numbers(phone_numbers), do: to_string(phone_numbers)
 
   def canonicalize_parameters(%{} = parameters) do

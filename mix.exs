@@ -14,7 +14,7 @@ defmodule AlixirSms.MixProject do
       start_permanent: Mix.env() == :prod,
       description: description(),
       deps: deps(),
-      package: package(),
+      package: package()
     ]
   end
 
@@ -32,8 +32,7 @@ defmodule AlixirSms.MixProject do
     [
       {:alixir_core, "~> 0.1"},
       {:poison, "~> 3.1"},
-
-      {:ex_doc, "~> 0.19", only: :dev},
+      {:ex_doc, "~> 0.19", only: :dev}
     ]
   end
 
