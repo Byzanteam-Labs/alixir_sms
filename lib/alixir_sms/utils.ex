@@ -12,11 +12,11 @@ defmodule Alixir.SMS.Utils do
   def make_query_string(operation) do
     operation
     |> build_send_sms_params()
-    |> Map.merge(build_system_params())
+    |> Map.merge(build_system_params(operation))
     |> canonicalize_parameters()
   end
 
-  def make_signature(http_method, query_str) do
+  def make_signature(http_method, query_str, access_secret) do
     str_to_sign =
       http_method
       |> to_string()
@@ -25,14 +25,14 @@ defmodule Alixir.SMS.Utils do
             method <> @joiner <> url_encode("/", :pop) <> @joiner <> url_encode(query_str, :pop)
           end).()
 
-    sign(str_to_sign, Env.access_secret() <> @joiner)
+    sign(str_to_sign, (access_secret || Env.access_secret()) <> @joiner)
   end
 
-  def build_system_params do
+  def build_system_params(operation) do
     %{
       SignatureMethod: "HMAC-SHA1",
       SignatureNonce: uuid(),
-      AccessKeyId: Env.access_key_id(),
+      AccessKeyId: operation.access_key_id || Env.access_key_id(),
       SignatureVersion: "1.0",
       Timestamp: iso_8601_extended_gmt_now(),
       Format: Env.format()
