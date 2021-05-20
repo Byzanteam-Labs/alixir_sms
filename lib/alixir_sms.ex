@@ -12,6 +12,12 @@ defmodule Alixir.SMS do
 
   alias Alixir.SMS.SendSMSOperation
 
+  @type options :: [
+          region_id: String.t(),
+          access_key_id: String.t(),
+          access_secret: String.t()
+        ]
+
   @doc """
   Send SMS. Return an `Alixir.SMS.SendSMSOperation` struct which
   could be passed to `Alixir.request` to perform the
@@ -31,13 +37,25 @@ defmodule Alixir.SMS do
 
   """
   @spec send_sms(
-    String.t() | nonempty_list(String.t()),
-    String.t(),
-    String.t(),
-    struct(),
-    String.t()
-  ) :: %Alixir.SMS.SendSMSOperation{http_method: :get}
-  def send_sms(phone_numbers, sign_name, template_code, template_param \\ %{}, out_id \\ "") do
+          String.t() | nonempty_list(String.t()),
+          String.t(),
+          String.t(),
+          map(),
+          String.t(),
+          options()
+        ) :: %Alixir.SMS.SendSMSOperation{http_method: :get}
+  def send_sms(
+        phone_numbers,
+        sign_name,
+        template_code,
+        template_param \\ %{},
+        out_id \\ "",
+        options \\ []
+      ) do
+    set_process_variable(options, :region_id)
+    set_process_variable(options, :access_key_id)
+    set_process_variable(options, :access_secret)
+
     %SendSMSOperation{
       http_method: :get,
       phone_numbers: phone_numbers,
@@ -46,5 +64,13 @@ defmodule Alixir.SMS do
       template_param: template_param,
       out_id: out_id
     }
+  end
+
+  defp set_process_variable(options, key) do
+    variable = Keyword.get(options, key)
+
+    if variable do
+      Process.put(key, variable)
+    end
   end
 end
