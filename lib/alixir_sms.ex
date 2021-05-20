@@ -34,7 +34,7 @@ defmodule Alixir.SMS do
           String.t() | nonempty_list(String.t()),
           String.t(),
           String.t(),
-          struct(),
+          map(),
           String.t()
         ) :: %Alixir.SMS.SendSMSOperation{http_method: :get}
   def send_sms(phone_numbers, sign_name, template_code, template_param \\ %{}, out_id \\ "") do
