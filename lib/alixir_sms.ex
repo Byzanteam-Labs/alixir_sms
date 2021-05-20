@@ -31,12 +31,12 @@ defmodule Alixir.SMS do
 
   """
   @spec send_sms(
-    String.t() | nonempty_list(String.t()),
-    String.t(),
-    String.t(),
-    struct(),
-    String.t()
-  ) :: %Alixir.SMS.SendSMSOperation{http_method: :get}
+          String.t() | nonempty_list(String.t()),
+          String.t(),
+          String.t(),
+          struct(),
+          String.t()
+        ) :: %Alixir.SMS.SendSMSOperation{http_method: :get}
   def send_sms(phone_numbers, sign_name, template_code, template_param \\ %{}, out_id \\ "") do
     %SendSMSOperation{
       http_method: :get,
