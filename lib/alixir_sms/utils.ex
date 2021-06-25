@@ -47,7 +47,7 @@ defmodule Alixir.SMS.Utils do
       PhoneNumbers: convert_phone_numbers(operation.phone_numbers),
       SignName: operation.sign_name,
       TemplateCode: operation.template_code,
-      TemplateParam: Poison.encode!(operation.template_param),
+      TemplateParam: Jason.encode!(operation.template_param),
       OutId: operation.out_id
     }
   end
