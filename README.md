@@ -8,7 +8,7 @@ by adding `alixir_sms` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:alixir_sms, "~> 0.1.0"}
+    {:alixir_sms, "~> 0.2"}
   ]
 end
 ```
