@@ -32,7 +32,7 @@ defmodule AlixirSms.MixProject do
     [
       {:alixir_core, "~> 0.2"},
       {:poison, "~> 3.1"},
-      {:ex_doc, "~> 0.19", only: :dev}
+      {:ex_doc, "~> 0.24.2", only: :dev}
     ]
   end
 
