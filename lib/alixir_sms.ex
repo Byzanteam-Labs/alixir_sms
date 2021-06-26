@@ -52,9 +52,13 @@ defmodule Alixir.SMS do
         out_id \\ "",
         options \\ []
       ) do
-    set_process_variable(options, :region_id)
-    set_process_variable(options, :access_key_id)
-    set_process_variable(options, :access_secret)
+    Alixir.SMS.Env.set_envs_in_process(
+      Keyword.take(options, [
+        :region_id,
+        :access_key_id,
+        :access_secret
+      ])
+    )
 
     %SendSMSOperation{
       http_method: :get,
@@ -64,13 +68,5 @@ defmodule Alixir.SMS do
       template_param: template_param,
       out_id: out_id
     }
-  end
-
-  defp set_process_variable(options, key) do
-    variable = Keyword.get(options, key)
-
-    if variable do
-      Process.put(key, variable)
-    end
   end
 end
