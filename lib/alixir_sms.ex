@@ -5,8 +5,8 @@ defmodule Alixir.SMS do
   ## Examples
 
   ```
-  Alixir.SMS.send_sms(args...)
-  |> Alixir.request()
+  operation = Alixir.SMS.send_sms("15000000000", "云通信", "SMS_0000", %{code: "1234", product: "ytx"}, "abcdefg")
+  Alixir.request(operation)
   ```
   """
 
@@ -19,21 +19,21 @@ defmodule Alixir.SMS do
         ]
 
   @doc """
-  Send SMS. Return an `Alixir.SMS.SendSMSOperation` struct which
-  could be passed to `Alixir.request` to perform the
-  request.
+  Construct a Send SMS operation.
+
+  Return an `Alixir.SMS.SendSMSOperation` struct which could be passed to `Alixir.request` to perform the request.
 
   ## Example
 
-    iex> Alixir.SMS.send_sms("15000000000", "云通信", "SMS_0000", %{code: "1234", product: "ytx"}, "abcdefg")
-    %Alixir.SMS.SendSMSOperation{
-      http_method: :get,
-      phone_numbers: "15000000000",
-      sign_name: "云通信",
-      template_code: "SMS_0000",
-      template_param: %{code: "1234", product: "ytx"},
-      out_id: "abcdefg"
-    }
+      iex> Alixir.SMS.send_sms("15000000000", "云通信", "SMS_0000", %{code: "1234", product: "ytx"}, "abcdefg")
+      %Alixir.SMS.SendSMSOperation{
+        http_method: :get,
+        phone_numbers: "15000000000",
+        sign_name: "云通信",
+        template_code: "SMS_0000",
+        template_param: %{code: "1234", product: "ytx"},
+        out_id: "abcdefg"
+      }
 
   """
   @spec send_sms(

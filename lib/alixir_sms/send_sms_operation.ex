@@ -1,6 +1,13 @@
 defmodule Alixir.SMS.SendSMSOperation do
   @enforce_keys [:http_method, :phone_numbers, :sign_name, :template_code]
-  defstruct [:http_method, :phone_numbers, :sign_name, :template_code, :template_param, :out_id]
+  defstruct [
+    :http_method,
+    :phone_numbers,
+    :sign_name,
+    :template_code,
+    :template_param,
+    :out_id
+  ]
 
   alias Alixir.SMS.Utils
   alias Alixir.SMS.SendSMSOperation
